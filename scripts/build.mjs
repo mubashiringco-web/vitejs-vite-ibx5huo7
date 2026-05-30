@@ -1,0 +1,10 @@
+import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+await rm('dist', { recursive: true, force: true });
+await mkdir('dist', { recursive: true });
+if (existsSync('public')) await cp('public', 'dist', { recursive: true });
+await cp('index.html', 'dist/index.html');
+await cp('src', 'dist/src', { recursive: true });
+await cp('Code.gs', 'dist/Code.gs');
+await writeFile('dist/README.txt', 'Performance Ledger static bundle. Install dependencies and run Vite for optimized bundling; this fallback build mirrors deployable assets for Netlify.\n');
+console.log('Static bundle written to dist/');
